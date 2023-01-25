@@ -33,7 +33,7 @@ const ProductCard = ({ product }) => {
       <div className="flex gap-2 mt-5">
         {pathname.includes("cart") && (
           <button
-            className="bg-red-500 rounded-full py-2 px-3 flex justify-between items-center  text-white text-bold"
+            className="bg-red-500 w-full rounded-full py-1 px-2 flex justify-center gap-2 items-center  text-white text-bold"
             onClick={() =>
               dispatch({
                 type: actionTypes.REMOVE_FROM_CART,
