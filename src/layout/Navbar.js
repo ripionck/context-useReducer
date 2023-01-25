@@ -25,6 +25,7 @@ const Navbar = () => {
         <li title="cart" className="bg-indigo-500 p-2 rounded-full">
           <Link to="/cart">
             <BsFillCartFill className="text-white " />
+            <input type="text" value="0" readOnly />
           </Link>
         </li>
       </ul>

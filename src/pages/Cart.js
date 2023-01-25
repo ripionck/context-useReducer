@@ -1,5 +1,5 @@
 import React from "react";
-import { RemoveCard } from "../components/RemoveCard";
+import ProductCard from "../components/ProductCard";
 import { useProducts } from "../context/ProductProvider";
 
 export const Cart = () => {
@@ -23,7 +23,7 @@ export const Cart = () => {
 
   if (!loading && !error && cart.length) {
     content = cart.map((product) => (
-      <RemoveCard key={product._id} product={product} />
+      <ProductCard key={product._id} product={product} />
     ));
   }
 
