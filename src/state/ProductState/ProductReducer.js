@@ -6,10 +6,14 @@ export const initialState = {
   error: false,
   cart: [],
   wishlist: [],
-  count: 0,
 };
 
 export const productReducer = (state, action) => {
+  const selectedProduct = state.cart.find(
+    (product) => product._id === action.payload._id
+  );
+
+  //console.log(selectedProduct);
   switch (action.type) {
     case actionTypes.FETCHING_START:
       return {
@@ -30,23 +34,48 @@ export const productReducer = (state, action) => {
         loading: false,
         error: true,
       };
+
+    //ADD_TO_CART
     case actionTypes.ADD_TO_CART:
+      if (selectedProduct) {
+        const newCart = state.cart.filter(
+          (product) => product._id !== selectedProduct._id
+        );
+        selectedProduct.quantity = selectedProduct.quantity + 1;
+        return {
+          ...state,
+          cart: [...newCart, selectedProduct],
+        };
+      }
       return {
         ...state,
-        count: state.count + action.value,
-        cart: [...state.cart, action.payload],
+        cart: [...state.cart, { ...action.payload, quantity: 1 }],
       };
+
+    //ADD_TO_WISHLIST
     case actionTypes.ADD_TO_WISHLIST:
       return {
         ...state,
-
         wishlist: [...state.wishlist, action.payload],
       };
+
+    //REMOVE_FROM_CART
     case actionTypes.REMOVE_FROM_CART:
+      if (selectedProduct.quantity > 1) {
+        const newCart = state.cart.filter(
+          (product) => product._id !== selectedProduct._id
+        );
+        selectedProduct.quantity = selectedProduct.quantity - 1;
+        return {
+          ...state,
+          cart: [...newCart, selectedProduct],
+        };
+      }
       return {
         ...state,
-        count: state.count - action.value,
-        cart: state.cart.filter((item) => item._id !== action.payload),
+        cart: state.cart.filter(
+          (product) => product._id !== action.payload._id
+        ),
       };
     default:
       return state;
