@@ -38,6 +38,7 @@ const ProductCard = ({ product }) => {
               dispatch({
                 type: actionTypes.REMOVE_FROM_CART,
                 payload: product._id,
+                value: 1,
               })
             }
           >
@@ -49,7 +50,11 @@ const ProductCard = ({ product }) => {
           <button
             className="bg-indigo-500 rounded-full py-1 px-2 flex-1 text-white text-bold"
             onClick={() =>
-              dispatch({ type: actionTypes.ADD_TO_CART, payload: product })
+              dispatch({
+                type: actionTypes.ADD_TO_CART,
+                payload: product,
+                value: 1,
+              })
             }
           >
             Add to cart
