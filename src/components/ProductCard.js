@@ -42,7 +42,7 @@ const ProductCard = ({ product }) => {
             onClick={() =>
               dispatch({
                 type: actionTypes.REMOVE_FROM_CART,
-                payload: product._id,
+                payload: product,
               })
             }
           >
